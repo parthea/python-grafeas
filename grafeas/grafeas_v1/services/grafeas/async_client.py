@@ -75,38 +75,6 @@ class GrafeasAsyncClient:
     parse_note_path = staticmethod(GrafeasClient.parse_note_path)
     occurrence_path = staticmethod(GrafeasClient.occurrence_path)
     parse_occurrence_path = staticmethod(GrafeasClient.parse_occurrence_path)
-    project_path = staticmethod(GrafeasClient.project_path)
-    parse_project_path = staticmethod(GrafeasClient.parse_project_path)
-
-    common_billing_account_path = staticmethod(
-        GrafeasClient.common_billing_account_path
-    )
-    parse_common_billing_account_path = staticmethod(
-        GrafeasClient.parse_common_billing_account_path
-    )
-
-    common_folder_path = staticmethod(GrafeasClient.common_folder_path)
-    parse_common_folder_path = staticmethod(GrafeasClient.parse_common_folder_path)
-
-    common_organization_path = staticmethod(GrafeasClient.common_organization_path)
-    parse_common_organization_path = staticmethod(
-        GrafeasClient.parse_common_organization_path
-    )
-
-    common_project_path = staticmethod(GrafeasClient.common_project_path)
-    parse_common_project_path = staticmethod(GrafeasClient.parse_common_project_path)
-
-    common_location_path = staticmethod(GrafeasClient.common_location_path)
-    parse_common_location_path = staticmethod(GrafeasClient.parse_common_location_path)
-
-    @property
-    def transport(self) -> GrafeasTransport:
-        """Return the transport used by the client instance.
-
-        Returns:
-            GrafeasTransport: The transport used by the client instance.
-        """
-        return self._client.transport
 
     get_transport_class = functools.partial(
         type(GrafeasClient).get_transport_class, type(GrafeasClient)
@@ -164,8 +132,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -188,7 +155,7 @@ class GrafeasAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=30.0,
@@ -251,8 +218,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, filter])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent, filter]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -277,7 +243,7 @@ class GrafeasAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=30.0,
@@ -334,8 +300,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -358,7 +323,7 @@ class GrafeasAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=30.0,
@@ -419,8 +384,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, occurrence])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent, occurrence]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -501,8 +465,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, occurrences])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent, occurrences]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -515,9 +478,8 @@ class GrafeasAsyncClient:
 
         if parent is not None:
             request.parent = parent
-
-        if occurrences:
-            request.occurrences.extend(occurrences)
+        if occurrences is not None:
+            request.occurrences = occurrences
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -587,8 +549,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name, occurrence, update_mask])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name, occurrence, update_mask]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -665,8 +626,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -689,7 +649,7 @@ class GrafeasAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=30.0,
@@ -744,8 +704,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -768,7 +727,7 @@ class GrafeasAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=30.0,
@@ -831,8 +790,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, filter])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent, filter]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -857,7 +815,7 @@ class GrafeasAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=30.0,
@@ -912,8 +870,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -936,7 +893,7 @@ class GrafeasAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=30.0,
@@ -1003,8 +960,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, note_id, note])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent, note_id, note]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -1084,8 +1040,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent, notes])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent, notes]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -1098,9 +1053,8 @@ class GrafeasAsyncClient:
 
         if parent is not None:
             request.parent = parent
-
-        if notes:
-            request.notes.update(notes)
+        if notes is not None:
+            request.notes = notes
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -1170,8 +1124,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name, note, update_mask])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name, note, update_mask]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -1258,8 +1211,7 @@ class GrafeasAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name, filter])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name, filter]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -1284,7 +1236,7 @@ class GrafeasAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=30.0,
