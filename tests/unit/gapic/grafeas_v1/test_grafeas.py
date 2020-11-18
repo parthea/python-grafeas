@@ -539,8 +539,8 @@ def test_list_occurrences_pages():
             RuntimeError,
         )
         pages = list(client.list_occurrences(request={}).pages)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 @pytest.mark.asyncio
@@ -612,10 +612,10 @@ async def test_list_occurrences_async_pages():
             RuntimeError,
         )
         pages = []
-        async for page in (await client.list_occurrences(request={})).pages:
-            pages.append(page)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        async for page_ in (await client.list_occurrences(request={})).pages:
+            pages.append(page_)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_delete_occurrence(
@@ -2128,8 +2128,8 @@ def test_list_notes_pages():
             RuntimeError,
         )
         pages = list(client.list_notes(request={}).pages)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 @pytest.mark.asyncio
@@ -2185,10 +2185,10 @@ async def test_list_notes_async_pages():
             RuntimeError,
         )
         pages = []
-        async for page in (await client.list_notes(request={})).pages:
-            pages.append(page)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        async for page_ in (await client.list_notes(request={})).pages:
+            pages.append(page_)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_delete_note(transport: str = "grpc", request_type=grafeas.DeleteNoteRequest):
@@ -3297,8 +3297,8 @@ def test_list_note_occurrences_pages():
             RuntimeError,
         )
         pages = list(client.list_note_occurrences(request={}).pages)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 @pytest.mark.asyncio
@@ -3370,10 +3370,10 @@ async def test_list_note_occurrences_async_pages():
             RuntimeError,
         )
         pages = []
-        async for page in (await client.list_note_occurrences(request={})).pages:
-            pages.append(page)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        async for page_ in (await client.list_note_occurrences(request={})).pages:
+            pages.append(page_)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_transport_instance():
@@ -3649,6 +3649,27 @@ def test_grafeas_grpc_asyncio_transport_channel_mtls_with_adc(
         assert transport.grpc_channel == mock_grpc_channel
 
 
+def test_note_path():
+    project = "squid"
+    note = "clam"
+
+    expected = "projects/{project}/notes/{note}".format(project=project, note=note,)
+    actual = GrafeasClient.note_path(project, note)
+    assert expected == actual
+
+
+def test_parse_note_path():
+    expected = {
+        "project": "whelk",
+        "note": "octopus",
+    }
+    path = GrafeasClient.note_path(**expected)
+
+    # Check that the path construction is reversible.
+    actual = GrafeasClient.parse_note_path(path)
+    assert expected == actual
+
+
 def test_occurrence_path():
     project = "squid"
     occurrence = "clam"
@@ -3669,27 +3690,6 @@ def test_parse_occurrence_path():
 
     # Check that the path construction is reversible.
     actual = GrafeasClient.parse_occurrence_path(path)
-    assert expected == actual
-
-
-def test_note_path():
-    project = "squid"
-    note = "clam"
-
-    expected = "projects/{project}/notes/{note}".format(project=project, note=note,)
-    actual = GrafeasClient.note_path(project, note)
-    assert expected == actual
-
-
-def test_parse_note_path():
-    expected = {
-        "project": "whelk",
-        "note": "octopus",
-    }
-    path = GrafeasClient.note_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = GrafeasClient.parse_note_path(path)
     assert expected == actual
 
 
