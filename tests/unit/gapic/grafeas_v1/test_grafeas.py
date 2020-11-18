@@ -3649,27 +3649,6 @@ def test_grafeas_grpc_asyncio_transport_channel_mtls_with_adc(
         assert transport.grpc_channel == mock_grpc_channel
 
 
-def test_note_path():
-    project = "squid"
-    note = "clam"
-
-    expected = "projects/{project}/notes/{note}".format(project=project, note=note,)
-    actual = GrafeasClient.note_path(project, note)
-    assert expected == actual
-
-
-def test_parse_note_path():
-    expected = {
-        "project": "whelk",
-        "note": "octopus",
-    }
-    path = GrafeasClient.note_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = GrafeasClient.parse_note_path(path)
-    assert expected == actual
-
-
 def test_occurrence_path():
     project = "squid"
     occurrence = "clam"
@@ -3691,3 +3670,41 @@ def test_parse_occurrence_path():
     # Check that the path construction is reversible.
     actual = GrafeasClient.parse_occurrence_path(path)
     assert expected == actual
+
+
+def test_note_path():
+    project = "squid"
+    note = "clam"
+
+    expected = "projects/{project}/notes/{note}".format(project=project, note=note,)
+    actual = GrafeasClient.note_path(project, note)
+    assert expected == actual
+
+
+def test_parse_note_path():
+    expected = {
+        "project": "whelk",
+        "note": "octopus",
+    }
+    path = GrafeasClient.note_path(**expected)
+
+    # Check that the path construction is reversible.
+    actual = GrafeasClient.parse_note_path(path)
+    assert expected == actual
+
+
+def test_client_withDEFAULT_CLIENT_INFO():
+    client_info = gapic_v1.client_info.ClientInfo()
+
+    with mock.patch.object(
+        transports.GrafeasTransport, "_prep_wrapped_messages"
+    ) as prep:
+        client = GrafeasClient(client_info=client_info,)
+        prep.assert_called_once_with(client_info)
+
+    with mock.patch.object(
+        transports.GrafeasTransport, "_prep_wrapped_messages"
+    ) as prep:
+        transport_class = GrafeasClient.get_transport_class()
+        transport = transport_class(client_info=client_info,)
+        prep.assert_called_once_with(client_info)
